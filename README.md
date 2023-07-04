@@ -29,7 +29,9 @@ To install HashTag, follow these steps:
 
 To use HashTag, run the `hashtag` command followed by the required options and arguments.
 
-'hashtag [-w WORDLIST] [-p HASHFILE] [-f FORMAT] [-show] [-b BRUTE_FORCE] [-bb FULL_BRUTE] [-k KEEP] [hash]'
+```
+hashtag [-w WORDLIST] [-p HASHFILE] [-f FORMAT] [-show] [-b BRUTE_FORCE] [-bb FULL_BRUTE] [-k KEEP] [hash]
+```
 
 | Short | Long         | Argument    | Description                                                      
 |-------|--------------|-------------|------------------------------------------------------------------
