@@ -45,20 +45,20 @@ hashtag [-w WORDLIST] [-p HASHFILE] [-f FORMAT] [-show] [-b BRUTE_FORCE] [-bb FU
 ## Examples
 
 1. Crack a multiple hashes:
-   hashtag -w wordlist.txt -p hashes.txt
+- hashtag -w wordlist.txt -p hashes.txt
    
 2. Crack a single hash:
-   hashtag -w wordlist.txt 48bb6e862e54f2a795ffc4e541caed4d
+- hashtag -w wordlist.txt 48bb6e862e54f2a795ffc4e541caed4d
 
 3. Crack a list of hashes in a specific format:
-   hashtag -w wordlist.txt -f MD5 -p hashes.txt
+- hashtag -w wordlist.txt -f MD5 -p hashes.txt
 
 4. Full-Brute Force doing all possible combinations from 3 - 5 chars:
-   hashtag -bb 5 48bb6e862e54f2a795ffc4e541caed4d
+- hashtag -bb 5 48bb6e862e54f2a795ffc4e541caed4d
 
 6. Brute-Force a hash with specific char and wildcards:
-   hashtag -b kang@@@@ 1A732667F3917C0F4AA98BB13011B9090C6F8065
-   hashtag -b kang@@@@ 1A732667F3917C0F4AA98BB13011B9090C6F8065 -k
+- hashtag -b kang@@@@ 1A732667F3917C0F4AA98BB13011B9090C6F8065
+- hashtag -b kang@@@@ 1A732667F3917C0F4AA98BB13011B9090C6F8065 -k
 
 For more information and additional options, run `hashtag -show`.
 
@@ -72,7 +72,7 @@ Contributions are welcome! Please check the [Contributing Guidelines](CONTRIBUTI
 
 ## Authors
 
-- John Hilde <johnhilde@example.com>
+- John Hilde
 
 
 
