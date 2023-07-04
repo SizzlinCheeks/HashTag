@@ -1,3 +1,11 @@
+<h1 align="center">
+  <br>
+  <a href="https://github.com/SizzlinCheeks/HashTag"><img src="https://www.freepik.com/free-vector/hashtag-symbol-brush-stroke-typography-vector_36226824.htm#query=hashtag&position=0&from_view=keyword&track=sph" alt="HashTag"></a>
+  <br>
+  Hash Buster
+  <br>
+</h1>
+
 # HashTag
 
 HashTag is a command-line tool for cracking hash values using various techniques, such as wordlist-based attacks and brute-force attacks. It supports multiple hash formats and provides flexibility in configuring the cracking process.
