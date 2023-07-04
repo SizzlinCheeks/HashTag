@@ -1,10 +1,22 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/SizzlinCheeks/HashTag"><img src="https://www.freepik.com/free-vector/hashtag-symbol-brush-stroke-typography-vector_36226824.htm#query=hashtag&position=0&from_view=keyword&track=sph" alt="HashTag"></a>
+  <a href="https://github.com/SizzlinCheeks/HashTag"><img src="" alt="HashTag"></a>
   <br>
   Hash Buster
   <br>
 </h1>
+
+<p align="center">
+  <a href="https://github.com/SizzlinCheeks/HashTag/releases">
+    <img src="https://img.shields.io/github/release/SizzlinCheeks/HashtTag.svg">
+  </a>
+  <a href="https://github.com/SizzlinCheeks/HashTag/issues?q=is%3Aissue+is%3Aclosed">
+      <img src="https://img.shields.io/github/issues-closed-raw/SizzlinCheeks/HashTag.svg">
+  </a>
+</p>
+
+<img width="576" alt="Screenshot 2023-07-04 at 6 51 38 PM" src="https://github.com/SizzlinCheeks/HashTag/assets/72412221/295d2026-f4da-4def-bb26-3e2f3cfec2ad">
+
 
 # HashTag
 
