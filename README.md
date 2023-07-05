@@ -82,7 +82,7 @@ hashtag [-w WORDLIST] [-p HASHFILE] [-f FORMAT] [-show] [-b BRUTE_FORCE] [-bb FU
 > **Note:** For more information and additional options, run `hashtag -show`.
 
 
-1. Crack a multiple hashes:
+1. Crack multiple hashes:
  ```
 hashtag -w wordlist.txt -p hashes.txt
  ```
