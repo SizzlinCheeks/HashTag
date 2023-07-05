@@ -35,13 +35,25 @@ HashTag is a command-line tool for cracking hash values using various techniques
 
 To install HashTag, follow these steps:
 
-1. Clone the repository: git clone https://github.com/SizzlinCheeks/HashTag
-2. Change into the project directory: cd HashTag
+1. Clone the repository:
+```
+git clone https://github.com/SizzlinCheeks/HashTag
+```
+2. Change into the project directory
+```
+cd HashTag
+```
 3. Run the installation script:
 
-  - For Linux and macOS: python3 install_hashtag.py
+  - For Linux and macOS:
+```
+python3 install_hashtag.py
+```
    
-  - For Windows: python install_hashtag.py
+  - For Windows:
+```
+python install_hashtag.py
+```
 
 4. Follow the on-screen instructions to complete the installation.
 5. You can now use 'hashtag' in your terminal!
