@@ -2,7 +2,7 @@
   <br>
   <a href="https://github.com/SizzlinCheeks/HashTag"><img src="https://github.com/SizzlinCheeks/HashTag/assets/72412221/7ad47d70-69a8-4039-a854-1eaf01e9313b" alt="HashTag"></a>
   <br>
-  Hash Buster
+  HashTag
   <br>
 </h1>
 
