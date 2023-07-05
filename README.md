@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="https://github.com/SizzlinCheeks/HashTag/releases">
-    <img src="https://img.shields.io/github/v/release/SizzlinCheeks/HashtTag.svg">
+    <img src="https://img.shields.io/github/v/release/SizzlinCheeks/HashTag.svg">
   </a>
   <a href="https://github.com/SizzlinCheeks/HashTag/issues?q=is%3Aissue+is%3Aclosed">
       <img src="https://img.shields.io/github/issues-closed-raw/SizzlinCheeks/HashTag.svg">
