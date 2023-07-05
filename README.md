@@ -25,6 +25,7 @@ HashTag is a command-line tool for cracking hash values using various techniques
 
 ## Features
 
+- Automatically finds hash formats
 - Crack hash values using wordlist-based attacks
 - Perform brute-force attacks to crack hash values
 - Support for multiple hash formats
