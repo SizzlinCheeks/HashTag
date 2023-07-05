@@ -8,14 +8,14 @@
 
 <p align="center">
   <a href="https://github.com/SizzlinCheeks/HashTag/releases">
-    <img src="https://img.shields.io/github/release/SizzlinCheeks/HashtTag.svg">
+    <img src="https://img.shields.io/github/v/release/SizzlinCheeks/HashtTag.svg">
   </a>
   <a href="https://github.com/SizzlinCheeks/HashTag/issues?q=is%3Aissue+is%3Aclosed">
       <img src="https://img.shields.io/github/issues-closed-raw/SizzlinCheeks/HashTag.svg">
   </a>
 </p>
 
-<img width="576" alt="Screenshot 2023-07-04 at 6 51 38 PM" src="https://github.com/SizzlinCheeks/HashTag/assets/72412221/295d2026-f4da-4def-bb26-3e2f3cfec2ad">
+<img width="576" src="https://github.com/SizzlinCheeks/HashTag/assets/72412221/295d2026-f4da-4def-bb26-3e2f3cfec2ad">
 
 
 # HashTag
