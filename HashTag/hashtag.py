@@ -860,21 +860,41 @@ def display_password(password, hash): # Displays the password and the format of 
     print("\033[93m" + "-" * 80 + "\033[0m")  
 
 def update_script():
-    github_raw_url = "https://raw.githubusercontent.com/SizzlinCheeks/HashTag/main/HashTag/hashtag.py"
-
     current_dir = os.path.dirname(os.path.abspath(__file__))
     script_path = os.path.join(current_dir, "hashtag.py")
 
     try:
-        response = requests.get(github_raw_url)
-        response.raise_for_status()
-        
-        with open(script_path, "w", encoding="utf-8") as script_file:
-            script_file.write(response.text)
+        # Download the updated script from the GitHub repository
+        url = "https://raw.githubusercontent.com/SizzlinCheeks/HashTag/main/HashTag/hashtag.py"
+        response = requests.get(url)
+        if response.status_code != 200:
+            print("\033[91mError occurred while downloading the updated script.\033[0m")
+            sys.exit(1)
 
-        print("\033[92mScript updated successfully!\033[0m")
-    except requests.exceptions.RequestException as e:
+        # Save the updated script to a temporary file
+        temp_path = os.path.join(current_dir, "hashtag_temp.py")
+        with open(temp_path, "w", encoding="utf-8") as temp_file:
+            temp_file.write(response.text)
+
+        # Move the updated script to the installation directory
+        platform_name = platform.system().lower()
+        if platform_name == 'linux' or platform_name == 'darwin':  # macOS
+            destination_dir = '/usr/local/bin'
+        elif platform_name == 'windows':
+            destination_dir = os.path.join(os.environ['ProgramFiles'], 'Hashtag')
+        else:
+            print("\033[91mUnsupported platform. Cannot update the script.\033[0m")
+            sys.exit(1)
+
+        if not os.path.exists(destination_dir):
+            os.makedirs(destination_dir)
+
+        os.replace(temp_path, os.path.join(destination_dir, "hashtag.py"))
+        print("\033[92mScript successfully updated and moved to the installation directory.\033[0m")
+
+    except Exception as e:
         print(f"\033[91mError occurred while updating the script: {str(e)}\033[0m")
+        sys.exit(1)
 
 def main(): # The Bread and Butter
     parser = argparse.ArgumentParser(description='Hash Cracking Script', formatter_class=argparse.RawTextHelpFormatter) 
