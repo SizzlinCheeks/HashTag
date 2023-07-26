@@ -719,7 +719,7 @@ def perform_wordlist_substitution(substitution_string, wordlist_file):
     
     counter = 1
     while True:
-        filename = f"{wordlist_file}{counter}"
+        filename = f"{wordlist_file}{counter}.txt"
         if not os.path.exists(filename):
             break
         counter += 1
