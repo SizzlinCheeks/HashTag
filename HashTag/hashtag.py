@@ -3,6 +3,7 @@
 # Hash Cracking Script
 
 import hashlib
+import requests
 import itertools
 import argparse
 import subprocess
@@ -34,13 +35,15 @@ Positional Arguments:
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Options:
 
-    -w,       --wordlist    [WORDLIST]       Path to the wordlist file
-    -p,       --hashfile    [HASHFILE]       Path to the file containing hashes
-    -f,       --format      [FORMAT]         The Hash format to crack
-    -b,       --brute       [BRUTE_FORCE]    String for brute-force (@:lowercase, $:uppercase, %:special, #:numeric, ^:lower + uppercase)
-    -k,       --keep        [KEEP]           Keep the hash file (Used in conjunction with --brute)
-    -show,    --show        [SHOW]           Display help information
-    -bb,      --full-brute  [BRUTE_FORCE]    Will run through every possibility of passwords (>3 char). Specify the max length of the password.
+    -w       --wordlist     [WORDLIST]       Path to the wordlist file
+    -p       --hashfile     [HASHFILE]       Path to the file containing hashes
+    -f       --format       [FORMAT]         The Hash format to crack
+    -b       --brute        [BRUTE_FORCE]    String for brute-force (@:lowercase, $:uppercase, %:special, #:numeric, ^:lower + uppercase)
+    -k       --keep         [KEEP]           Keep the hash file (Used in conjunction with --brute)
+    -show    --show         [SHOW]           Display help information
+    -bb      --full-brute   [BRUTE_FORCE]    Will run through every possibility of passwords (>3 char). Specify the max length of the password.
+    -W       --wordlist-sub [WORDLIST_SUB]   Path to the wordlist you would like to substitute each line
+    -s       --substring    [SUBSTRING]      String used for substitution. Use: '(WORD)' to replace with the WORDLIST_SUB (Special characters from BRUTE_FORCE is used.)
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Formats:
 
@@ -62,6 +65,9 @@ Example usage:
         
     hashtag -bb 5 48bb6e862e54f2a795ffc4e541caed4d
         Runs through every possibility of passwords (4 to 5 char) against the hash: 48bb6e862e54f2a795ffc4e541caed4d
+    
+    hashtag -W example.lst -s '%(WORD)@@#' 
+        Uses each line from 'example.lst' wordlist to substitute it in for (WORD). Then the special characters are used to specify the type of characters wanted.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         '''
     print(help_message)
@@ -703,6 +709,52 @@ def generate_wordlist(brute_force): # Generates the wordlist based on the brute 
 
     return filename
 
+def perform_wordlist_substitution(substitution_string, wordlist_file):
+    # Define character sets
+    lowercase = 'abcdefghijklmnopqrstuvwxyz'
+    uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    lower_uppercase = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    special = '!@#$%^&*()_+'
+    numeric = '0123456789'
+    
+    counter = 1
+    while True:
+        filename = f"{wordlist_file}{counter}.txt"
+        if not os.path.exists(filename):
+            break
+        counter += 1
+
+    with open(wordlist_file, 'r') as f:
+        lines = f.read().splitlines()
+
+    with open(filename, 'w', encoding='utf-8') as file:
+        for brute_force in lines:
+            brute_force = substitution_string.replace("(WORD)", brute_force)
+            character_sets = []
+            for char in brute_force: # Map characters to corresponding character sets
+                if char == '@':
+                    character_sets.append(lowercase)
+                elif char == '$':
+                    character_sets.append(uppercase)
+                elif char == '%':
+                    character_sets.append(special)
+                elif char == '#':
+                    character_sets.append(numeric)
+                elif char == "^":
+                    character_sets.append(lower_uppercase)
+                else:
+                    character_sets.append(char)
+            
+            # Generate combinations of characters from the character sets
+            combinations = itertools.product(*character_sets)
+            for combination in combinations:
+                word = ''.join(combination)
+                # Write each combination of characters to the wordlist file
+                file.write(word + '\n')
+    
+    return filename
+
+   
 def crack_hash(hash_value, wordlist, hash_type_length): # Default implementation for cracking hashes
     print(f"Cracking hash: {hash_value}")
     
@@ -808,12 +860,20 @@ def display_password(password, hash): # Displays the password and the format of 
     print("\033[93m" + "-" * 80 + "\033[0m")  
 
 def update_script():
+    github_raw_url = "https://raw.githubusercontent.com/SizzlinCheeks/HashTag/main/HashTag/hashtag.py"
+
     current_dir = os.path.dirname(os.path.abspath(__file__))
     script_path = os.path.join(current_dir, "hashtag.py")
+
     try:
-        subprocess.check_call(["git", "-C", current_dir, "pull"])
+        response = requests.get(github_raw_url)
+        response.raise_for_status()
+        
+        with open(script_path, "w", encoding="utf-8") as script_file:
+            script_file.write(response.text)
+
         print("\033[92mScript updated successfully!\033[0m")
-    except subprocess.CalledProcessError as e:
+    except requests.exceptions.RequestException as e:
         print(f"\033[91mError occurred while updating the script: {str(e)}\033[0m")
 
 def main(): # The Bread and Butter
@@ -827,6 +887,8 @@ def main(): # The Bread and Butter
     parser.add_argument('-k', '--keep', action ='store_true', help='Keep the hash file (Used in conjunction with --brute)')
     parser.add_argument('-bb','--full-brute', help = 'Runs through every possibility of passwords')
     parser.add_argument('--update', action ='store_true', help='Updates the Script')
+    parser.add_argument('-W', '--wordlist-sub', help='Perform wordlist substitution with the given string')
+    parser.add_argument('-s', '--substring', help='String to be replaced in the wordlist')
 
     args = parser.parse_args()
     
@@ -837,6 +899,13 @@ def main(): # The Bread and Butter
     if args.show: # If the user wants to see the help information
         help_message()
         sys.exit(0)
+       
+    if args.wordlist_substitution: # If the user wants to perform wordlist substitution
+        print("\n\033[91mGenerating Substituted Wordlist File...\033[0m")
+        filename = perform_wordlist_substitution(args.substring, args.wordlist_sub)
+        print(f"\033[92mDone! The file is stored as {filename}\033[0m\n")
+        sys.exit(0)
+        
        
     if args.hash is None and args.brute is not None: # If the user wants to create JUST a brute-force password wordlist
         print("\n\033[91mGenerating brute-force wordlist...\033[0m")
