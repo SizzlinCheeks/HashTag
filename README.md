@@ -67,15 +67,17 @@ To use HashTag, run the `hashtag` command followed by the required options and a
 hashtag [-w WORDLIST] [-p HASHFILE] [-f FORMAT] [-show] [-b BRUTE_FORCE] [-bb FULL_BRUTE] [-k KEEP] [hash]
 ```
 
-| Short | Long         | Argument    | Description                                                      
-|-------|--------------|-------------|------------------------------------------------------------------
-| -w    | --wordlist   | [WORDLIST]  | Path to the wordlist file                                        
-| -p    | --hashfile   | [HASHFILE]  | Path to the file containing hashes                               
-| -f    | --format     | [FORMAT]    | The Hash format to crack                                         
-| -b    | --brute      | [BRUTE_FORCE] String for brute-force (@:lowercase, $:uppercase, %:special, #:numeric, ^:lower + uppercase) |
-| -k    | --keep       | [KEEP]      | Keep the hash file (Used in conjunction with --brute)            
-| -show | --show       | [SHOW]      | Display help information                                         
-| -bb   | --full-brute | [BRUTE_FORCE] Will run through every possibility of passwords (>3 char). Specify the max len of the password.
+| Short | Long           | Argument      | Description                                                      
+|-------|----------------|---------------|------------------------------------------------------------------
+| -w    | --wordlist     | [WORDLIST]    | Path to the wordlist file                                        
+| -p    | --hashfile     | [HASHFILE]    | Path to the file containing hashes                               
+| -f    | --format       | [FORMAT]      | The Hash format to crack                                         
+| -b    | --brute        | [BRUTE_FORCE] | String for brute-force (@:lowercase, $:uppercase, %:special, #:numeric, ^:lower + uppercase) |
+| -k    | --keep         | [KEEP]        | Keep the hash file (Used in conjunction with --brute)            
+| -show | --show         | [SHOW]        | Display help information                                         
+| -bb   | --full-brute   | [BRUTE_FORCE] | Will run through every possibility of passwords (>3 char). Specify the max len of the password.
+| -W    | --wordlist-sub | [WORDLIST_SUB]| Path to the Wordlist that will be used to create another wordlist
+| -s    | --substring    | [SUBSTRING]   | Creates a string with '(WORD)' that will be used to substitute words from [WORDLIST_SUB].
 
 
 ## Examples
@@ -103,6 +105,10 @@ hashtag -bb 5 48bb6e862e54f2a795ffc4e541caed4d
 ```
 hashtag -b kang@@@@ 1A732667F3917C0F4AA98BB13011B9090C6F8065
 hashtag -b kang@@@@ 1A732667F3917C0F4AA98BB13011B9090C6F8065 -k
+```
+7. Creates a Wordlist based off another Wordlist:
+```
+hashtag -W example.lst -s '(WORD)###'
 ```
 
 ## License
